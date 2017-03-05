@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWeatherTextView;
 
     // DONE (6) Add a TextView variable for the error message display
-    TextView mErrorMessageTextView;
+    private TextView mErrorMessageTextView;
 
     // DONE (16) Add a ProgressBar variable to show and hide the progress bar
-    ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         // DONE (18) Within your AsyncTask, override the method onPreExecute and show the loading indicator
         @Override
         protected void onPreExecute() {
-            mProgressBar.setVisibility(View.VISIBLE);
             super.onPreExecute();
+            mProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
