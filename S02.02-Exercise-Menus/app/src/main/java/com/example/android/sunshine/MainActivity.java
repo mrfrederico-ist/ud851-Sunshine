@@ -28,7 +28,6 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
-import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -120,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             loadWeatherData();
             return true;
         }
-        return false;
+
+        return super.onOptionsItemSelected(item);
     }
 }
