@@ -17,11 +17,14 @@ public class DetailActivity extends AppCompatActivity {
 
         // DONE (2) Display the weather forecast that was passed from MainActivity
         mWeatherDataDetail = (TextView) findViewById(R.id.tv_weather_detail);
-        Intent intent = getIntent();
-        String weatherDetailText = intent.getStringExtra(Intent.EXTRA_TEXT);
 
-        if (weatherDetailText != null) {
-            mWeatherDataDetail.setText(weatherDetailText);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+                String weatherDetailText = intent.getStringExtra(Intent.EXTRA_TEXT);
+                mWeatherDataDetail.setText(weatherDetailText);
+            }
         }
     }
 }
