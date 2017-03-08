@@ -155,6 +155,21 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
+    private void showMap(String address) {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("geo")
+                .path("0,0")
+                .query(address);
+        Uri geoLocation = builder.build();
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, geoLocation);
+        /* Verify if exist at least one application that can open a map */
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         @Override
@@ -220,8 +235,10 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             loadWeatherData();
             return true;
         }
-
-        // TODO (2) Launch the map when the map menu item is clicked
+        // DONE (2) Launch the map when the map menu item is clicked
+        else if (id == R.id.action_map) {
+            showMap("Lisbon");
+        }
 
         return super.onOptionsItemSelected(item);
     }
