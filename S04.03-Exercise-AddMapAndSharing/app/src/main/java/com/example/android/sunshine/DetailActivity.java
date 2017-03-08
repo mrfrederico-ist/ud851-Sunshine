@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,37 +33,24 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void shareForecast() {
+    public Intent getShareForecastIntent() {
         Intent intent = ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
-                .setChooserTitle(FORECAST_SHARE_HASHTAG)
-                .setText(mForecast)
+                .setText(mForecast + FORECAST_SHARE_HASHTAG)
                 .getIntent();
 
-        Log.d(this.toString(), "text to share: " + mForecast);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+        return intent;
     }
 
-    // TODO (4) Display the menu and implement the forecast sharing functionality
+    // DONE (4) Display the menu and implement the forecast sharing functionality
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.detail, menu);
+        getMenuInflater().inflate(R.menu.detail, menu);
+
+        Intent shareIntent = getShareForecastIntent();
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        menuItem.setIntent(shareIntent);
 
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_share) {
-            shareForecast();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

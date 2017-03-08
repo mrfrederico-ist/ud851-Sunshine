@@ -29,5 +29,5 @@
         android:title="@string/action_map"
         android:id="@+id/action_map"
         android:orderInCategory="2"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 </menu>

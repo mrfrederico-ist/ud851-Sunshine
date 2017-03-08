@@ -37,6 +37,7 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
@@ -156,12 +157,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     }
 
     private void showMap(String address) {
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme("geo")
-                .path("0,0")
-                .query(address);
-        Uri geoLocation = builder.build();
-
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + address);
 
         Intent intent = new Intent(Intent.ACTION_VIEW, geoLocation);
         /* Verify if exist at least one application that can open a map */
@@ -237,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         }
         // DONE (2) Launch the map when the map menu item is clicked
         else if (id == R.id.action_map) {
-            showMap("Lisbon");
+            showMap("Lisbon, PT");
         }
 
         return super.onOptionsItemSelected(item);
